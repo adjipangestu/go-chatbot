@@ -1,7 +1,7 @@
-#Chat Bot Whatsapp Covid-19 Golang
+# Chat Bot Whatsapp Covid-19 Golang
 Chatbot whatsapp golang menggunakan library rhymen/go-whatsapp dan API dari (https://api.kawalcorona.com/indonesia)
 
-##Cara Install 
+## Cara Install 
 `open terminal`
 
 `git clone`
