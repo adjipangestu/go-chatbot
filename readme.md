@@ -8,5 +8,8 @@ Chatbot whatsapp golang menggunakan library rhymen/go-whatsapp dan API dari (htt
 
 `go run main.go`
 
+## Example
+![example](https://github.com/adjipangestu/go-chatbot/blob/master/example.jpg)
+
 ### Library
 Package rhymen/go-whatsapp implements the WhatsApp Web API to provide a clean interface for developers (https://github.com/Rhymen/go-whatsapp/).
