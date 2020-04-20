@@ -28,13 +28,12 @@ func (wh *waHandler) HandleTextMessage(message lib.TextMessage) {
 
 	data := models.Indonesia{}
 
-	indonesia := data.GetData()
-	lampung := data.GetDataProvinsi()
-
 	var pesan = ""
 	if strings.Contains(strings.ToLower(message.Text), "covid:indonesia") || message.Info.Timestamp < wh.startTime{
+		indonesia := data.GetData()
 		pesan = indonesia
 	} else if strings.Contains(strings.ToLower(message.Text), "covid:lampung") || message.Info.Timestamp < wh.startTime{
+		lampung := data.GetDataProvinsi()
 		pesan = lampung
 	}
 

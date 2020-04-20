@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "name": "DKI Jakarta",
+      "positif": 3097,
+      "sembuh": 230,
+      "meninggal": 287
+    },
+    {
+      "name": "Jawa Barat",
+      "positif": 747,
+      "sembuh": 56,
+      "meninggal": 62
+    },
+    {
+      "name": "Jawa Tengah",
+      "positif": 747,
+      "sembuh": 56,
+      "meninggal": 62
+    },
+    {
+      "name": "Lampung",
+      "positif": 747,
+      "sembuh": 56,
+      "meninggal": 62
+    },
+    {
+      "name": "Kalimantan",
+      "positif": 747,
+      "sembuh": 56,
+      "meninggal": 62
+    }
+  ]
+}

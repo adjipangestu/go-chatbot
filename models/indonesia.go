@@ -22,8 +22,28 @@ type Provinsi struct {
 	Kasus_Meni   	int32    `json:"Kasus_Meni"`
 }
 
+type Item struct {
+	Name    	string    `json:"name"`
+	Positif     string    `json:"positif"`
+	Sembuh    	string    `json:"sembuh"`
+	Meninggal   string    `json:"meninggal"`
+}
+
+type Data struct {
+	ManyItems   []*Item `json:"data"`
+}
+
 type Attributes struct {
 	Attributes Provinsi   `json:"attributes"`
+}
+
+func (list Attributes) ToItem() *Item {
+	return &Item {
+		Name  : list.Attributes.Name,
+		Positif  : string(list.Attributes.Kasus_Posi),
+		Meninggal  : string(list.Attributes.Kasus_Meni),
+		Sembuh  : string(list.Attributes.Kasus_Semb),
+	}
 }
 
 func (i *Indonesia) GetData() string{
@@ -81,4 +101,35 @@ func (i *Indonesia) GetDataProvinsi() string {
 	}
 
 	return pesan
+}
+
+func (i *Indonesia)GetAll() (string, error) {
+	url_prov := "https://api.kawalcorona.com/indonesia/provinsi/"
+	//url := "https://api.kawalcorona.com/indonesia/"
+	response_prov, err := http.Get(url_prov)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer response_prov.Body.Close()
+
+	responseData_prov, err := ioutil.ReadAll(response_prov.Body)
+
+	var provinsi []Attributes
+	jsonErr_prov := json.Unmarshal([]byte(responseData_prov), &provinsi)
+	if jsonErr_prov != nil {
+		panic(jsonErr_prov)
+	}
+
+	list := make([]*Item, len(provinsi))
+	for i, _ := range provinsi {
+		list[i] = provinsi[i].ToItem()
+	}
+
+	b, err := json.Marshal(&Data{list})
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+
+	return string(b), nil
 }
