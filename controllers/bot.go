@@ -22,22 +22,13 @@ func (wh *waHandler) HandleError(err error) {
 
 func (wh *waHandler) HandleTextMessage(message lib.TextMessage) {
 
-	if !strings.Contains(strings.ToLower(message.Text), "covid:indonesia") && !strings.Contains(strings.ToLower(message.Text), "covid:lampung") || message.Info.Timestamp < wh.startTime {
+
+	if !strings.Contains(strings.ToLower(message.Text), "covid: today") || message.Info.Timestamp < wh.startTime {
 		return
 	}
 
-	data := models.Indonesia{}
-
-	var pesan = ""
-	if strings.Contains(strings.ToLower(message.Text), "covid:indonesia") || message.Info.Timestamp < wh.startTime{
-		indonesia := data.GetData()
-		pesan = indonesia
-	} else if strings.Contains(strings.ToLower(message.Text), "covid:lampung") || message.Info.Timestamp < wh.startTime{
-		lampung := data.GetDataProvinsi()
-		pesan = lampung
-	}
-
-	test := pesan
+	lampung := models.Response{}
+	test := lampung.GetData()
 
 	msg := lib.TextMessage{
 		Info: lib.MessageInfo{
