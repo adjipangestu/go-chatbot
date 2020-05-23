@@ -23,12 +23,26 @@ func (wh *waHandler) HandleError(err error) {
 func (wh *waHandler) HandleTextMessage(message lib.TextMessage) {
 
 
-	if !strings.Contains(strings.ToLower(message.Text), "covid: today") || message.Info.Timestamp < wh.startTime {
+	if !strings.Contains(strings.ToLower(message.Text), "covid: today") &&
+		!strings.Contains(strings.ToLower(message.Text), "covid: penyerta_meninggal") &&
+		!strings.Contains(strings.ToLower(message.Text), "covid: penyerta_positif") ||
+		message.Info.Timestamp < wh.startTime {
 		return
 	}
 
-	lampung := models.Response{}
-	test := lampung.GetData()
+	hari := models.Response{}
+	kasus := models.Kasus{}
+	test := ""
+	if strings.Contains(strings.ToLower(message.Text), "covid: today"){
+		test = hari.GetData()
+	}
+	if strings.Contains(strings.ToLower(message.Text), "covid: penyerta_meninggal") {
+		test = "*Kondisi Penyerta Meninggal Covid-19* \n\n" + kasus.GetDataKasusMeninggal()
+	}
+	if strings.Contains(strings.ToLower(message.Text), "covid: penyerta_positif") {
+		test = "*Kondisi Penyerta Positif Covid-19* \n\n" + kasus.GetDataKasusPositif()
+	}
+
 
 	msg := lib.TextMessage{
 		Info: lib.MessageInfo{

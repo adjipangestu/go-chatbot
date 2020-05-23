@@ -39,7 +39,7 @@ type Penambahan struct {
 	Meninggal   int    `json:"jumlah_meninggal"`
 	Dirawat  	int    `json:"jumlah_dirawat"`
 	Tanggal  	string    `json:"tanggal"`
-	Update  	string    `json:"updated"`
+	Create  	string    `json:"created"`
 }
 
 func (r *Response) GetData() string {
@@ -75,7 +75,7 @@ func (r *Response) GetData() string {
 		"Sembuh : " + strconv.Itoa(responseObject.Update.Penambahan.Sembuh) + ",\n" +
 		"Meninggal : " + strconv.Itoa(responseObject.Update.Penambahan.Meninggal) + "\n\n" +
 
-		"*Updated* : " + responseObject.Update.Penambahan.Update + "\n\n" +
+		"*Updated* : " + responseObject.Update.Penambahan.Create + "\n\n" +
 
 		"#jagakesehatan"
 
